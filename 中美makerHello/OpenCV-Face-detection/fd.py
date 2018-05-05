@@ -6,42 +6,28 @@ import time
 def converToRGB(img):
 	return cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
-# test = cv2.imread('chenglong1.jpg')#读取一张图片
-# cap = cv2.VideoCapture('http://192.168.1.4:8080/video')#获取视频串流
-cap = cv2.VideoCapture(0)#获取视频串流
+test = cv2.imread('E:/face-FD&FR/faces/hezhao.jpg')#读取一张图片
 
 
 
-# gray_img = cv2.cvtColor(test,cv2.COLOR_BGR2RGB)
-# plt.imshow(gray_img,cmap='gray')
+
+gray_img = cv2.cvtColor(test,cv2.COLOR_BGR2RGB)
+plt.imshow(gray_img,cmap='gray')
 
 
-haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-# faces = haar_face_cascade.detectMultiScale(gray_img,scaleFactor=1.1,minNeighbors=5 )
-# print('Face found: ',len(faces))
+haar_face_cascade = cv2.CascadeClassifier('lbpcascade_frontalface.xml')  #LEP分类器
+# haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml') #Harr分类器
 
-# for (x,y,w,h) in faces:
-# 	cv2.rectangle(test,(x,y),(x+w,y+h),(0,255,0),2)
-# print(faces)
-# plt.imshow(converToRGB(test))
+faces = haar_face_cascade.detectMultiScale(gray_img,scaleFactor=1.1,minNeighbors=5 )
+print('Face found: ',len(faces))
 
-# cv2.imshow('test',test)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-while(1):    # get a frame   
-    ret, test = cap.read()    # show a frame   
-    gray_img = cv2.cvtColor(test,cv2.COLOR_BGR2RGB)
-    faces=haar_face_cascade.detectMultiScale(gray_img,scaleFactor=1.3,minNeighbors=5 )#通过harr识别器识别人脸
-    for (x,y,w,h) in faces:
-        cv2.rectangle(test,(x,y),(x+w,y+h),(0,255,0),2)
-    print(faces)
-    plt.imshow(converToRGB(test))
-    cv2.imshow("capture",test)
-    k = cv2.waitKey(1) & 0xFF 
-    if k == 27:
-        break
+for (x,y,w,h) in faces:
+	cv2.rectangle(test,(x,y),(x+w,y+h),(0,255,0),2)
+print(faces)
+plt.imshow(converToRGB(test))
 
-cap.release()
-cv2.destroyAllWindows() 
+cv2.imshow('test',test)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
