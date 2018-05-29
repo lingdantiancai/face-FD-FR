@@ -1,0 +1,3 @@
+gaoyuyu 	male 	22  	2014113605 	material
+lixiangyu	male 	21	2016112345	computer
+chixiaoyu	female	21	2016112344	trsanport
